@@ -1,0 +1,117 @@
+{	
+	"extensionName": "Seeed Grove smile-project",
+	"description": "An Extension for Arduino Seeed Grove (Chain LED, LCD and distance sensor) ",
+	"version": "1.4",
+	"author": "Arne Bernin (arne@alamut.de)",
+	"homepage": "http://smile-smart-it.de/",
+	"sort":0,
+	"javascriptURL":"js/haw.js",
+  	"firmware":"1.0",
+  	"extensionPort":0,
+	"blockSpecs": [
+		[
+			"w",
+			"LCD zeige text %s","LCDshow","Hallo Welt!",
+			{
+				"setup":"lcd.begin(16,2);\n",
+				"inc":"#include <Wire.h>\n#include \"rgb_lcd.h\"\n",
+				"def":"rgb_lcd lcd;\n",
+				"work":"lcd.print({0});\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"LCD löschen","LCDclear","",
+			{
+				"setup":"lcd.begin(16,2);\n",
+				"inc":"#include <Wire.h>\n#include \"rgb_lcd.h\"\n",
+				"def":"rgb_lcd lcd;\n",
+				"work":"lcd.clear();\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"LCD aus","LCDoff","",
+			{
+				"setup":"lcd.begin(16,2);\n",
+				"inc":"#include <Wire.h>\n#include \"rgb_lcd.h\"\n",
+				"def":"rgb_lcd lcd;\n",
+				"work":"lcd.setRGB(0,0,0);\nlcd.noDisplay();\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"LCD an","LCDon","",
+			{
+				"setup":"lcd.begin(16,2);\n",
+				"inc":"#include <Wire.h>\n#include \"rgb_lcd.h\"\n",
+				"def":"rgb_lcd lcd;\n",
+				"work":"lcd.display();\n",
+				"loop":""
+			}
+		],
+
+		[
+			"w",
+			"LCD farbe %m.farbe","LCDcolor","blau",
+			{
+				"setup":"lcd.begin(16,2);\n",
+				"inc":"#include <Wire.h>\n#include \"rgb_lcd.h\"\n",
+				"def":"rgb_lcd lcd;\n",
+				"work":"lcd.setColor({0});\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"Chain LED %m.led r:%n g:%n b:%n","ChainLED","LED0",0,0,0,
+			{
+				"setup":"leds.init();\n",
+				"inc":"#include <Wire.h>\n#include \"ChainableLED.h\"\n",
+				"def":"ChainableLED leds(7, 8, 5);\n",
+				"work":"leds.setColorRGB({0}, {1}, {2}, {3});\n",
+				"loop":""
+			}
+		],	
+		[
+			"R",
+			"Abstandssensor %d.digital","USsensor","D8",
+			{
+				"setup":"",
+				"inc":"#include \"Ultrasonic.h\"\n",
+				"def":"Ultrasonic ultrasonic({0});\n",
+				"work":"ultrasonic.MeasureInCentimeters()",
+				"loop":""
+			}
+		]
+		
+	],
+	"menus": {
+		"digital":["D2","D3","D4","D5","D6","D7","D8"],
+		"analog":["A0","A1","A2","A3"],
+		"tone":["c","d","e","f","g","a","b","C"],
+		"farbe": ["weiß", "rot", "grün", "blau"],
+		"level":["HIGH","LOW"],
+		"onoff":["on","off"],
+		"axis":["x","y","z"],
+		"led":["LED0","LED1","LED2","LED3","LED4"]
+	},
+	"values":{
+		"D2":2,"D3":3,"D4":4,"D5":5,"D6":6,"D7":7,"D8":8,
+		"A0":0,"A1":1,"A2":2,"A3":3,
+		"c":1915,"d":1700,"e":1519,"f":1432,"g":1275,"a":1136,"b":1014,"c":956,
+		"LED0":0,"LED1":1,"LED2":2,"LED3":3,"LED4":4,
+		"HIGH":1,
+		"LOW":0,
+		"on":1,
+		"off":0,
+		"x":0,"y":1,"z":2,
+		"weiß":0,"rot":1,"grün":2,"blau":3
+	},
+	"translators":{
+	}
+	
+}
