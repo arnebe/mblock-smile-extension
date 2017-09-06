@@ -1,7 +1,7 @@
 {	
 	"extensionName": "Seeed Grove smile-project",
 	"description": "An Extension for Arduino Seeed Grove (Chain LED, LCD and distance sensor) ",
-	"version": "1.4",
+	"version": "1.5",
 	"author": "Arne Bernin (arne@alamut.de)",
 	"homepage": "http://smile-smart-it.de/",
 	"sort":0,
@@ -11,7 +11,7 @@
 	"blockSpecs": [
 		[
 			"w",
-			"LCD zeige text %s","LCDshow","Hallo Welt!",
+			"LCD show text %s","LCDshow","Hello World!",
 			{
 				"setup":"lcd.begin(16,2);\n",
 				"inc":"#include <Wire.h>\n#include \"rgb_lcd.h\"\n",
@@ -22,7 +22,7 @@
 		],
 		[
 			"w",
-			"LCD löschen","LCDclear","",
+			"LCD clear","LCDclear","",
 			{
 				"setup":"lcd.begin(16,2);\n",
 				"inc":"#include <Wire.h>\n#include \"rgb_lcd.h\"\n",
@@ -33,7 +33,7 @@
 		],
 		[
 			"w",
-			"LCD aus","LCDoff","",
+			"LCD off","LCDoff","",
 			{
 				"setup":"lcd.begin(16,2);\n",
 				"inc":"#include <Wire.h>\n#include \"rgb_lcd.h\"\n",
@@ -44,7 +44,7 @@
 		],
 		[
 			"w",
-			"LCD an","LCDon","",
+			"LCD on","LCDon","",
 			{
 				"setup":"lcd.begin(16,2);\n",
 				"inc":"#include <Wire.h>\n#include \"rgb_lcd.h\"\n",
@@ -53,10 +53,20 @@
 				"loop":""
 			}
 		],
-
 		[
 			"w",
-			"LCD farbe %m.farbe","LCDcolor","blau",
+			"LCD Pos row:%n col:%n","LCDPosition",0,0,
+			{
+				"setup":"lcd.begin(16,2);\n",
+				"inc":"#include <Wire.h>\n#include \"rgb_lcd.h\"\n",
+				"def":"rgb_lcd lcd;\n",
+				"work":"lcd.setCursor({1},{0});\n",
+				"loop":""
+			}
+		],	
+		[
+			"w",
+			"LCD color %m.farbe","LCDcolor","blau",
 			{
 				"setup":"lcd.begin(16,2);\n",
 				"inc":"#include <Wire.h>\n#include \"rgb_lcd.h\"\n",
@@ -86,7 +96,19 @@
 				"work":"ultrasonic.MeasureInCentimeters()",
 				"loop":""
 			}
+		],
+		[
+			"w",
+			"mp3 play %n","MP3","1",0,0,0,
+			{
+				"setup":"mp3.begin(9600);\ndelay(100);\nSelectPlayerDevice(0x02);\nSetVolume(255);\n",
+				"inc":"#include <SoftwareSerial.h>\n#include \"MP3Player_KT403A.h\"\n",
+				"def":"SoftwareSerial mp3(2, 3);\n",
+				"work":"SpecifyMusicPlay({0});\n",
+				"loop":""
+			}
 		]
+		
 		
 	],
 	"menus": {
@@ -94,6 +116,7 @@
 		"analog":["A0","A1","A2","A3"],
 		"tone":["c","d","e","f","g","a","b","C"],
 		"farbe": ["weiß", "rot", "grün", "blau"],
+		"color": ["white", "red", "green", "blue"],
 		"level":["HIGH","LOW"],
 		"onoff":["on","off"],
 		"axis":["x","y","z"],
@@ -112,6 +135,18 @@
 		"weiß":0,"rot":1,"grün":2,"blau":3
 	},
 	"translators":{
-	}
-	
+		"de_DE":{
+			"LCD off":"LCD aus",
+			"LCD on": "LCD an",
+			"Hello World": "Hallo Welt",
+			"LCD clear" : "LCD löschen",
+			"LCD show text %s":"LCD zeige text %s",
+			"LCD Pos row:%n col:%n":"LCD Pos Zeile:%n Spalte:%n",
+			"LCD color %m.farbe": "LCD farbe %m.farbe"
+
+			}
+
+		}
+		
+		
 }
